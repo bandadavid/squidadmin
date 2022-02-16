@@ -90,7 +90,6 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
                             <a href="<?php echo site_url(); ?>" id="menu_inicio" class="nav-item nav-link">Inicio</a>
-                            <a href="<?php echo site_url(); ?>/solicitudes/calendario" id="calendario" class="nav-item nav-link">Calendario</a>
 
                             <?php if ($this->session->userdata('Conectad0')) : ?>
                                 <?php if ($this->session->userdata('Conectad0')->perfil_usu == "ADMINISTRADOR") : ?>
@@ -123,7 +122,6 @@
                                     </div>
                                 </div>
                             <?php else : ?>
-                                <a href="<?php echo site_url('solicitudes/formulario'); ?>" class="nav-item nav-link" id="solicitar">Solicitar Reunión</a>
                                 <a href="<?php echo site_url('security/login'); ?>" id="ingresar" class="nav-item nav-link">Ingresar</a>
                             <?php endif; ?>
 
