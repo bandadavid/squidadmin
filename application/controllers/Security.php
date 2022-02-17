@@ -28,8 +28,8 @@ class Security extends CI_Controller
 
     public function ingresar()
     {
-        $usuarioIngresado = $this->input->post("usuario_name");
-        $password = $this->input->post("usuario_password");
+        $usuarioIngresado = $this->input->post("usuario_usu");
+        $password = $this->input->post("password_usu");
         $usuario = $this->usuario->obtenerPorUsuarioPassword($usuarioIngresado, $password);
 
         $this->session->set_flashdata("usuario", $usuarioIngresado);
@@ -54,25 +54,25 @@ class Security extends CI_Controller
 
     public function perfil()
     {
-        $this->load->view('template/header');
+        $this->load->view('header');
         $this->load->view('security/perfil');
-        $this->load->view('template/footer');
+        $this->load->view('footer');
     }
 
     public function cambiarPassword()
     {
 
         $passwordActual = $this->input->post("password_actual");
-        $passwordNuevo = $this->input->post("password_nuevo");
-        $usuario = $this->usuario->obtenerPorCodigo($this->session->userdata("age_codigo_usu"));
+        $passwordNuevo = $this->input->post("password_nueva");
+        $usuario = $this->usuario->obtenerPorCodigo($this->session->userdata("Conectad0")->codigo_usu);
 
-        // if($usuario->password_usu==$passwordActual){
-        $this->usuario->actualizar(array("password_usu" => $passwordNuevo), $usuario->codigo_usu);
-        $this->session->set_flashdata("confirmacion", "La contraseña ha sido actualizada exitosamente. Por seguridad debe ingresar nuevamente.");
-
-        /* }else{
-                $this->session->set_flashdata("error","La contraseña actual ingresada es incorrecta");
-            }*/
+        if ($usuario->password_usu == md5($passwordActual)) {
+            $this->usuario->actualizar(array("password_usu" => md5($passwordNuevo)), $usuario->codigo_usu);
+            $this->session->set_flashdata("confirmacion", "La contraseña ha sido actualizada exitosamente.");
+            //redirect("security/logout");
+        } else {
+            $this->session->set_flashdata("error", "La contraseña actual ingresada es incorrecta");
+        }
         redirect("security/perfil");
     }
 }

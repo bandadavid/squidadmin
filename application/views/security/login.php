@@ -14,13 +14,13 @@
           <div class="row form-group">
             <div class="col-md-12">
               <b>USUARIO: </b> <br>
-              <input type="text" class="form-control" name="usuario_name" id="usuario_name" placeholder="Ingrese su usuario" required>
+              <input type="text" class="form-control" name="usuario_usu" id="usuario_usu" placeholder="Ingrese su usuario" required>
             </div>
           </div>
           <div class="row form-group">
             <div class="col-md-12">
               <b>CONTRASEÑA: </b> <br>
-              <input type="password" class="form-control" name="usuario_password" id="usuario_password" placeholder="Ingrese su contraseña" required>
+              <input type="password" class="form-control" name="password_usu" id="password_usu" placeholder="Ingrese su contraseña" required>
             </div>
           </div>
           <div class="row form-group">

@@ -17,8 +17,32 @@ class Usuarios extends CI_Controller
 
     public function index()
     {
+        $usuarios = new grocery_CRUD();
+
+        $usuarios->set_table('usuario')
+            ->set_subject('Usuarios')
+            ->columns('codigo_usu', 'apellido_usu', 'nombre_usu', 'usuario_usu', 'perfil_usu', 'estado_usu')
+            ->display_as('codigo_usu', 'COD')
+            ->display_as('apellido_usu', 'Apellido')
+            ->display_as('nombre_usu', 'Nombre')
+            ->display_as('usuario_usu', 'Usuario')
+            ->display_as('perfil_usu', 'Perfil')
+            ->display_as('estado_usu', 'Estado')
+            ->display_as('password_usu', 'Contraseña');
+
+
+        $usuarios->set_language("spanish");
+        $usuarios->set_theme("flexigrid");
+
+        $usuarios->unset_clone();
+        $usuarios->field_type('perfil_usu', 'dropdown', array("ADMINISTRADOR" => "ADMINISTRADOR", "INVITADO" => "INVITADO"));
+        $usuarios->field_type('estado_usu', 'dropdown', array("ACTIVO" => "ACTIVO", "INACTIVO" => "INACTIVO"));
+        $usuarios->field_type('password_usu', 'password');
+        $usuarios->fields('apellido_usu', 'nombre_usu', 'usuario_usu', 'password_usu', 'perfil_usu', 'estado_usu');
+        $usuarios->required_fields('apellido_usu', 'nombre_usu', 'usuario_usu', 'password_usu', 'perfil_usu', 'estado_usu');
+        $output = $usuarios->render();
         $this->load->view('header');
-        $this->load->view('usuarios/index');
+        $this->load->view('usuarios/index', $output);
         $this->load->view('footer');
     }
 }

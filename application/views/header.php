@@ -27,11 +27,16 @@
     <!-- Template Stylesheet -->
     <link href="<?php echo base_url(); ?>/assets/template/css/style.css" rel="stylesheet">
 
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script type="text/javascript" src="<?php echo base_url('assets/validator/jquery.validate.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/validator/additional-methods.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/validator/misvalidaciones.js'); ?>"></script>
 
     <script type="text/javascript">
         toastr.options = {
@@ -57,6 +62,17 @@
     <script src='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.js'></script>
     <script src="<?php echo base_url(); ?>assets/fullcalendar/locale-all1.js"></script>
     <script src="<?php echo base_url(); ?>assets/fullcalendar/es1.js"></script>
+    <style media="screen">
+        label.error {
+            color: red;
+        }
+
+        input.error,
+        select.error,
+        textarea.error {
+            border: 1px solid red;
+        }
+    </style>
 </head>
 
 <body>
@@ -95,17 +111,27 @@
                                 <?php if ($this->session->userdata('Conectad0')->perfil_usu == "ADMINISTRADOR") : ?>
                                     <div class="nav-item dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="administracion">
+                                            CONTROL DE ACCESO
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="#" class="dropdown-item">
+                                                Acls
+                                            </a>
+                                            <a href="#" class="dropdown-item">
+                                                Reglas
+                                            </a>
+                                            <a href="#" class="dropdown-item">
+                                                Reglas Individuales
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="administracion">
                                             ADMINISTRACIÓN
                                         </a>
                                         <div class="dropdown-menu">
                                             <a href="<?php echo site_url('usuarios/index'); ?>" class="dropdown-item">
                                                 Gestión de Usuarios
-                                            </a>
-                                            <a href="<?php echo site_url('disponibilidades/index'); ?>" class="dropdown-item">
-                                                Gestión de Disponibilidad
-                                            </a>
-                                            <a href="<?php echo site_url('solicitudes/gestionarReuniones'); ?>" class="dropdown-item">
-                                                Gestión de Reuniones
                                             </a>
                                         </div>
                                     </div>
@@ -118,6 +144,7 @@
                                         CONECTADO: <?php echo $this->session->userdata('Conectad0')->nombre_usu; ?> <?php echo $this->session->userdata('Conectad0')->apellido_usu; ?>
                                     </a>
                                     <div class="dropdown-menu">
+                                        <a href="<?php echo site_url('security/perfil'); ?>" class="dropdown-item">Cambiar Contraseña</a>
                                         <a href="<?php echo site_url('security/logout'); ?>" onclick="return confirm('¿Está seguro de salir del sistema?');" class="dropdown-item">Salir</a>
                                     </div>
                                 </div>
@@ -135,9 +162,50 @@
         </div>
         <!-- Nav Bar End -->
 
-
         <style media="screen">
             .form-control {
                 border: 1px solid #1D1A49;
             }
+
+            #loading {
+                position: fixed;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                opacity: 0.7;
+                background-color: #fff;
+                z-index: 99999 !important;
+            }
+
+            #loading-image {
+                z-index: 99999 !important;
+            }
         </style>
+
+        <div id="loading">
+            <img id="loading-image" src="https://notamedia.es/loading.gif" alt="Procesando..." />
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#loading').hide();
+            });
+
+            function mostrarCarga() {
+                $('#loading').fadeIn();
+            }
+
+            function ocultarCarga() {
+                $('#loading').hide();
+            }
+
+            $(document).ajaxStart(function() {
+                mostrarCarga();
+            }).ajaxComplete(function() {
+                ocultarCarga();
+            });
+        </script>
