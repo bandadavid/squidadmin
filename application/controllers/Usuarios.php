@@ -19,6 +19,7 @@ class Usuarios extends CI_Controller
     {
         $usuarios = new grocery_CRUD();
 
+
         $usuarios->set_table('usuario')
             ->set_subject('Usuarios')
             ->columns('codigo_usu', 'apellido_usu', 'nombre_usu', 'usuario_usu', 'perfil_usu', 'estado_usu')
@@ -35,14 +36,27 @@ class Usuarios extends CI_Controller
         $usuarios->set_theme("flexigrid");
 
         $usuarios->unset_clone();
+        $usuarios->unset_delete();
         $usuarios->field_type('perfil_usu', 'dropdown', array("ADMINISTRADOR" => "ADMINISTRADOR", "INVITADO" => "INVITADO"));
         $usuarios->field_type('estado_usu', 'dropdown', array("ACTIVO" => "ACTIVO", "INACTIVO" => "INACTIVO"));
         $usuarios->field_type('password_usu', 'password');
         $usuarios->fields('apellido_usu', 'nombre_usu', 'usuario_usu', 'password_usu', 'perfil_usu', 'estado_usu');
         $usuarios->required_fields('apellido_usu', 'nombre_usu', 'usuario_usu', 'password_usu', 'perfil_usu', 'estado_usu');
+        $usuarios->callback_before_insert(array($this, 'encrypt_password_callback'));
+
+        if ($usuarios->getState() != "add") {
+            $usuarios->field_type("password_usu", "hidden");
+        }
         $output = $usuarios->render();
         $this->load->view('header');
         $this->load->view('usuarios/index', $output);
         $this->load->view('footer');
+    }
+
+
+    function encrypt_password_callback($post_array)
+    {
+        $post_array['password_usu'] = md5($post_array['password_usu']);
+        return $post_array;
     }
 }

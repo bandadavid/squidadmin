@@ -68,7 +68,7 @@
 </script>
 <script type="text/javascript">
   <?php if ($this->session->flashdata("error")) : ?>
-    toastr.error("<?php echo $this->session->flashdata("error"); ?>");
+    //toastr.error("<?php echo $this->session->flashdata("error"); ?>");
   <?php endif; ?>
 </script>
 </body>

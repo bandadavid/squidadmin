@@ -66,7 +66,7 @@
       },
       password_nueva: {
         required: true,
-        minlength: 6,
+        minlength: 10,
       },
       password_confirmada: {
         required: true,

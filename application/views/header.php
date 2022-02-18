@@ -110,11 +110,11 @@
                             <?php if ($this->session->userdata('Conectad0')) : ?>
                                 <?php if ($this->session->userdata('Conectad0')->perfil_usu == "ADMINISTRADOR") : ?>
                                     <div class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="administracion">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="controlacceso">
                                             CONTROL DE ACCESO
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a href="#" class="dropdown-item">
+                                            <a href="<?php echo site_url('acls/index'); ?>" class="dropdown-item">
                                                 Acls
                                             </a>
                                             <a href="#" class="dropdown-item">

@@ -35,15 +35,20 @@ class Security extends CI_Controller
         $this->session->set_flashdata("usuario", $usuarioIngresado);
         //$config['sess_expiration'] = 10;
         if ($usuario) {
-            if ($usuario->estado_usu == "ACTIVO") {
+            if ($usuario->estado_usu == "ACTIVO" && $usuario->perfil_usu == "ADMINISTRADOR") {
                 $dataSesion = array(
                     "Conectad0" => $usuario,
                 );
                 $this->session->set_userdata($dataSesion);
                 $this->session->set_flashdata("bienvenida", "Bienvenido al sistema.");
                 redirect('welcome/index');
-            } else {
-                $this->session->set_flashdata("error", "El usuario ingresado está desactivado.");
+            } else if ($usuario->estado_usu == "ACTIVO" && $usuario->perfil_usu == "INVITADO") {
+                $dataSesion = array(
+                    "Conectad0" => $usuario,
+                );
+                $this->session->set_userdata($dataSesion);
+                $this->session->set_flashdata("bienvenida", "Bienvenido al sistema.");
+                redirect('navegador/index');
             }
         } else {
             $this->session->set_flashdata("error", "Usuario o Contraseña Incorrectos.");
