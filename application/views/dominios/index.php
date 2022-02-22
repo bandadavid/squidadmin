@@ -20,7 +20,7 @@ foreach ($css_files as $file) : ?>
     <div class="col-md-12">
         <h3 class="text-center" style="color:#1D1A49;">
             <i class="fa fa-users"></i>
-            GESTIONAR ACLS
+            RESTRINGIR POR DOMINIOS
         </h3>
         <br>
         <?php echo $output; ?>

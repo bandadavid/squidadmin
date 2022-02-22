@@ -20,16 +20,16 @@ class Usuarios extends CI_Controller
         $usuarios = new grocery_CRUD();
 
 
-        $usuarios->set_table('usuario')
-            ->set_subject('Usuarios')
-            ->columns('codigo_usu', 'apellido_usu', 'nombre_usu', 'usuario_usu', 'perfil_usu', 'estado_usu')
-            ->display_as('codigo_usu', 'COD')
-            ->display_as('apellido_usu', 'Apellido')
-            ->display_as('nombre_usu', 'Nombre')
-            ->display_as('usuario_usu', 'Usuario')
-            ->display_as('perfil_usu', 'Perfil')
-            ->display_as('estado_usu', 'Estado')
-            ->display_as('password_usu', 'Contraseña');
+        $usuarios->set_table('usuario');
+        $usuarios->set_subject('Usuarios');
+        $usuarios->columns('codigo_usu', 'apellido_usu', 'nombre_usu', 'usuario_usu', 'perfil_usu', 'estado_usu');
+        $usuarios->display_as('codigo_usu', 'COD');
+        $usuarios->display_as('apellido_usu', 'Apellido');
+        $usuarios->display_as('nombre_usu', 'Nombre');
+        $usuarios->display_as('usuario_usu', 'Usuario');
+        $usuarios->display_as('perfil_usu', 'Perfil');
+        $usuarios->display_as('estado_usu', 'Estado');
+        $usuarios->display_as('password_usu', 'Contraseña');
 
 
         $usuarios->set_language("spanish");

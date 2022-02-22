@@ -1,29 +1,11 @@
 <div id="container">
+    </head>
 
-    <div style="text-align:center;">
-        <h1 style="color:blue;">Buscador Squid Admin</h1>
-    </div>
-
-    <?php if (isset($error_msg)) { ?>
-
-        <div id="error">
-            <p><?php echo strip_tags($error_msg); ?></p>
-        </div>
-
-    <?php } ?>
-
-    <div id="frm">
-
-        <form action="index.php" method="post" style="margin-bottom:0;">
-            <input name="url" type="text" style="width:442px;" autocomplete="off" placeholder="https://" />
-            <input type="submit" value="Buscar" />
-        </form>
-
-        <script type="text/javascript">
-            document.getElementsByName("url")[0].focus();
+    <body>
+        <h1 style="text-align: center;">Buscador Squid Admin</h1>
+        <script async src="https://cse.google.com/cse.js?cx=007019498718139788174:amtiepdpgeg">
         </script>
-
-    </div>
+        <div class="gcse-search"></div>
 
 </div>
 

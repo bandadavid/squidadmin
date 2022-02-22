@@ -114,14 +114,14 @@
                                             CONTROL DE ACCESO
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a href="<?php echo site_url('acls/index'); ?>" class="dropdown-item">
-                                                Acls
+                                            <a href="<?php echo site_url('dominios/index'); ?>" class="dropdown-item">
+                                                Dominios
                                             </a>
-                                            <a href="#" class="dropdown-item">
-                                                Reglas
+                                            <a href="<?php echo site_url('palabras/index'); ?>" class="dropdown-item">
+                                                Palabras
                                             </a>
-                                            <a href="#" class="dropdown-item">
-                                                Reglas Individuales
+                                            <a href="<?php echo site_url('ips/index'); ?>" class="dropdown-item">
+                                                IP
                                             </a>
                                         </div>
                                     </div>
